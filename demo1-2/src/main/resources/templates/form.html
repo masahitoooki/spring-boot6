@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Form Sample</title>
+    </head>
+    <body>
+        <form th:action="@{/form}" method="post" th:object="${myForm}">
+            <table border="1">
+                <tr>
+                    <th>No</th>
+                    <th>入力</th>
+                    <th>削除</th>
+                </tr>
+                <tr th:each="row, loop : *{rows}">
+                    <th th:text="${loop.count}"></th>
+                    <th>
+                        <input type="text" th:field="*{rows[__${loop.index}__].value}" />
+                    </th>
+                    <th>
+                        <button type="submit" name="removeIndex" th:value="${loop.index}">
+                            Removeだよ
+                        </button>
+                    </th>
+                </tr>
+            </table>
+
+            <input type="submit" name="appendRow" value="追加" />
+        </form>
+    </body>
+</html>
